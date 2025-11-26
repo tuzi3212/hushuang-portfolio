@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>胡爽 · AI 应用开发作品集</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="胡爽 · AI 应用开发 / Python 自动化 / Web 工具作品集" />
+  <style>
+:root {
+  --bg-light: #ffffff;
+  --bg-light-secondary: #f5f5f7;
+  --text-main: #1d1d1f;
+  --text-muted: #6e6e73;
+  --border-subtle: #e5e5e7;
+
+  --primary: #0071e3;
+  --primary-soft: #358df2;
+
+  --card-bg: #ffffff;
+
+  --accent-gradient: linear-gradient(160deg, #0077ed, #5ab1ff);
+
+  --shadow-card: 0 6px 14px rgba(0,0,0,0.05), 0 2px 4px rgba(0,0,0,0.04);
+  --shadow-card-hover: 0 18px 40px rgba(0,0,0,0.10), 0 8px 22px rgba(0,0,0,0.06);
+  --shadow-soft: 0 6px 18px rgba(0,0,0,0.06);
+  --shadow-soft-hover: 0 18px 40px rgba(0,0,0,0.10);
+
+  --font-h1: 52px;
+  --font-h1-mobile: 40px;
+  --font-h2: 22px;
+  --font-h3: 17px;
+  --font-body: 16px;
+  --font-small: 14px;
+
+  --lh-title: 1.15;
+  --lh-subtitle: 1.22;
+  --lh-body: 1.6;
+  --lh-small: 1.45;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Microsoft YaHei", system-ui, sans-serif;
+}
+
+body {
+  background: var(--bg-light);
+  color: var(--text-main);
+  min-height: 100vh;
+  line-height: var(--lh-body);
+  font-weight: 400;
+  font-smooth: always;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 统一布局留白 */
+.page-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 20px 80px;
+}
+
+/* 顶部导航 */
+
+
+.logo-text-main {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+
+nav {
+  display: flex;
+  gap: 22px;
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+nav a {
+  padding: 6px 12px;
+  border-radius: 999px;
+  transition: 0.2s;
+}
+
+nav a:hover {
+  background: rgba(148,163,184,0.15);
+}
+
+/* Apple 风 Sticky 导航栏 */
+.sticky-nav {
+  position: sticky;
+  top: 0;
+  backdrop-filter: saturate(180%) blur(20px);
+  background: rgba(255,255,255,0.72);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  z-index: 50;
+  padding: 14px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.3s ease;
+}
+
+.sticky-nav a {
+  padding: 6px 14px;
+  border-radius: 12px;
+  font-size: 15px;
+  color: var(--text-main);
+  transition: .2s;
+}
+
+.sticky-nav a:hover {
+  background: rgba(0,0,0,0.06);
+}
+
+/* Apple 风格 HERO */
+.hero {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr;
+  gap: 48px;
+  align-items: center;
+  margin-bottom: 48px;
+}
+
+.hero-title {
+  font-size: 52px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 18px;
+  line-height: var(--lh-title);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+.hero-title span {
+  color: var(--primary);
+}
+
+.hero-subtitle {
+  font-size: 18px;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+  line-height: var(--lh-subtitle);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+/* 按钮 */
+.btn-primary {
+  padding: 11px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 999px;
+  border: none;
+  color: white;
+  background: var(--primary);
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,118,255,0.28);
+  transition: 0.2s;
+}
+
+.btn-primary:hover {
+  background: var(--primary-soft);
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+.btn-outline {
+  padding: 11px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 999px;
+  border: none;
+  background: var(--primary);
+  color: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,118,255,0.28);
+  transition: 0.2s;
+}
+
+.btn-outline:hover {
+  background: var(--primary-soft);
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+/* 头像卡片 */
+.hero-avatar-card {
+  background: #ffffff;
+  padding: 22px 22px 18px;
+  border-radius: 24px;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+}
+
+/* 项目卡片 Apple 风格 */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.project-card {
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 20px 20px 18px;
+  border: 1px solid var(--border-subtle);
+  transition: all 0.28s cubic-bezier(.25,.8,.25,1);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.project-card:hover {
+  transform: translateY(-12px);
+  border-color: #0077ed;
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* Apple 风 Section Header 排版系统 */
+.section-header {
+  margin-bottom: 28px;
+}
+
+/* Apple 风 Section 标题徽标（section-title-badge） */
+.section-title-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 999px;
+  background: #f5f5f7;
+  border: 1px solid var(--border-subtle);
+  color: #1d1d1f;
+  margin-left: 8px;
+  vertical-align: middle;
+  transition: all .25s ease;
+}
+
+.section-title-badge:hover {
+  background: #ffffff;
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.section-title {
+  margin-bottom: 6px;
+}
+
+.section-desc {
+  font-size: var(--font-body);
+  color: var(--text-muted);
+  line-height: var(--lh-body);
+  margin-top: 4px;
+}
+.section-title {
+  font-size: var(--font-h2);
+  font-weight: 700;
+}
+
+.project-name {
+  font-size: var(--font-h3);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.project-desc {
+  font-size: var(--font-small);
+  color: var(--text-muted);
+  flex-grow: 1;
+  line-height: var(--lh-small);
+  margin-bottom: 14px;
+}
+
+.project-tech {
+  margin-top: 12px;
+}
+
+footer {
+  margin-top: 40px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* 响应式 */
+@media (max-width: 800px) {
+  /* ===== Apple Mobile Typography（移动端字体系统优化） ===== */
+  :root {
+    --font-h1-mobile: 34px;
+    --font-h2: 20px;
+    --font-h3: 16px;
+    --font-body: 15px;
+    --font-small: 13px;
+  }
+
+  .hero-subtitle {
+    line-height: 1.48 !important;
+    letter-spacing: -0.01em;
+  }
+
+  .section-title {
+    font-size: 20px !important;
+    line-height: 1.22;
+  }
+
+  .section-desc {
+    font-size: 15px !important;
+    line-height: 1.55;
+  }
+
+  .skill-group-title {
+    font-size: 15px !important;
+  }
+
+  .skill-badge {
+    font-size: 13px !important;
+    padding: 7px 12px !important;
+  }
+  /* ===== M5：移动端 HERO Apple 风体验增强 ===== */
+
+  /* 增加 HERO 区上下呼吸空间 */
+  .hero {
+    margin-top: 6px;
+    margin-bottom: 40px;
+  }
+
+  /* 副标题在移动端更均衡的左右留白 */
+  .hero-subtitle {
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  /* 按钮触控区域增大 */
+  .hero-actions button,
+  .hero-actions a {
+    padding: 13px 22px !important;
+    font-size: 15px !important;
+  }
+
+  /* 头像卡片背景加更柔和的亮面渐变（Apple 风） */
+  .hero-avatar-card {
+    background: linear-gradient(180deg, #ffffff 0%, #f7f7f7 100%);
+  }
+
+  /* HERO 区所有元素淡入延迟更柔和 */
+  .hero-title {
+    transition: opacity 1s ease, transform 1s ease;
+  }
+  .hero-subtitle {
+    transition: opacity 1.1s ease, transform 1.1s ease;
+  }
+  /* ===== Apple 移动端间距优化：全站更舒适 ===== */
+  .page-wrap {
+    padding-left: 26px;
+    padding-right: 26px;
+  }
+
+  section {
+    padding-top: 56px;
+    padding-bottom: 72px;
+  }
+
+  .section-header {
+    margin-bottom: 32px;
+  }
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 28px;
+  }
+
+  .hero-title {
+    font-size: var(--font-h1-mobile);
+    line-height: 1.22;
+  }
+
+  .hero-subtitle {
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .hero-avatar-card {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .project-card {
+    padding: 16px 16px 14px;
+    border-radius: 18px;
+    gap: 10px;
+  }
+
+  .project-name {
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+
+  .project-desc {
+    font-size: 13px;
+    margin-bottom: 10px;
+    line-height: 1.55;
+  }
+
+  .project-tech {
+    font-size: 13px;
+    margin-top: 8px;
+  }
+
+  .project-links {
+    margin-top: 12px;
+    gap: 10px;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .contact-card {
+    padding: 20px;
+  }
+
+  .skills-wrap {
+    gap: 10px;
+  }
+
+  .skill-badge {
+    font-size: 13px;
+    padding: 7px 12px;
+  }
+}
+  .avatar-small-card {
+  width: 260px;
+  padding: 18px;
+  border-radius: 24px;
+  border: 1px solid var(--border-subtle);
+  background: #fafafa;
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  transform: translateY(0);
+  transition: all .35s cubic-bezier(.25,.8,.25,1);
+}
+
+.avatar-small-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-soft-hover);
+}
+
+.avatar-rounded {
+  width: 160px;
+  height: 160px;
+  background: #ffffff;
+  padding: 8px;
+  border-radius: 32px;
+  object-fit: cover;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+.avatar-text-wrap {
+  text-align: center;
+}
+
+.avatar-name {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.avatar-role, .avatar-meta {
+  font-size: 13px;
+  color: #6e6e73;
+  line-height: var(--lh-small);
+}
+
+  .project-links a {
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 13px;
+    border-radius: 999px;
+    border: 1px solid var(--border-subtle);
+    background: #ffffff;
+    color: #0071e3;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all .25s ease;
+    margin-right: 0;
+  }
+
+  .project-links a:hover {
+    background: #f5f5f7;
+    border-color: var(--primary);
+    transform: translateY(-1px);
+  }
+  .project-links {
+    display: flex;
+    gap: 12px;
+    margin-top: 14px;
+    padding-top: 12px;
+  }
+  /* Apple 统一胶囊标签系统（Tag / Pill） */
+  .tag,
+  .project-pill {
+    display: inline-block;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 999px;
+    background: #f5f5f7;
+    border: 1px solid var(--border-subtle);
+    color: #1d1d1f;
+    margin-right: 6px;
+    margin-bottom: 8px;
+    transition: all .25s ease;
+  }
+
+  .tag:hover,
+  .project-pill:hover {
+    background: #ffffff;
+    border-color: #0077ed;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+
+  /* 强调型标签（如 AI 应用开发） */
+  .tag-strong {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #ffffff;
+  }
+
+  .tag-strong:hover {
+    background: var(--primary-soft);
+    border-color: var(--primary-soft);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+  /* Apple 风技能标签 */
+  .skills-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .skill-badge {
+    display: inline-block;
+    padding: 8px 14px;
+    background: #f5f5f7;
+    border: 1px solid var(--border-subtle);
+    border-radius: 999px;
+    font-size: 14px;
+    color: #1d1d1f;
+    font-weight: 500;
+    transition: all .25s ease;
+  }
+
+  .skill-badge:hover {
+    background: #ffffff;
+    border-color: #0077ed;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+
+  .skill-badge-strong {
+    background: #0071e3;
+    color: #ffffff;
+    border-color: #0071e3;
+  }
+
+  .skill-badge-strong:hover {
+    background: #005bbf !important;
+    color: #ffffff !important;
+    border-color: #005bbf !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+
+  .hero-fade-in {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+  .skill-group-title {
+    width: 100%;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1d1d1f;
+    margin-top: 22px;
+    margin-bottom: 4px;
+  }
+
+/* 统一段落排版（Apple 风 Paragraph Rhythm） */
+.about-text p {
+  margin-bottom: 16px;
+  line-height: var(--lh-body);
+}
+
+.about-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* Section 顶部留白统一（Apple 风 Section Spacing） */
+section {
+  padding-top: 48px;
+}
+
+/* Section 底部留白统一（Apple 风 Section Bottom Rhythm） */
+section {
+  padding-bottom: 64px;
+}
+
+section:first-of-type {
+  padding-top: 0;
+}
+/* Apple 风 About / Contact 卡片 */
+
+.contact-card {
+  padding: 24px;
+  background: #ffffff;
+  border-radius: 22px;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+  transition: all .28s cubic-bezier(.25,.8,.25,1);
+}
+
+.contact-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-soft-hover);
+}
+
+.contact-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: var(--font-body);
+  line-height: var(--lh-body);
+}
+
+.contact-item:last-child {
+  border-bottom: none;
+}
+
+.contact-item span:first-child {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.contact-item span:last-child {
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+  /* ===========================
+     Apple 深色模式 Dark Mode
+     =========================== */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg-light: #000000;
+      --bg-light-secondary: #111113;
+      --text-main: #f5f5f7;
+      --text-muted: #9a9aa2;
+      --border-subtle: #2c2c2e;
+      --card-bg: #1c1c1e;
+    }
+
+    body {
+      background: var(--bg-light);
+      color: var(--text-main);
+    }
+
+    .sticky-nav {
+      background: rgba(20,20,22,0.68);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: saturate(180%) blur(20px);
+    }
+
+    .sticky-nav a:hover {
+      background: rgba(255,255,255,0.10);
+    }
+
+    .hero-title span {
+      color: #4da3ff;
+    }
+
+    .hero-avatar-card,
+    .avatar-small-card,
+    .project-card,
+    .contact-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 8px 26px rgba(0,0,0,0.6);
+    }
+
+    .project-card:hover,
+    .avatar-small-card:hover,
+    .contact-card:hover {
+      box-shadow: 0 14px 40px rgba(0,0,0,0.7);
+    }
+
+    .skill-badge {
+      background: #2c2c2e;
+      border-color: #3a3a3c;
+      color: #f5f5f7;
+    }
+
+    .skill-badge:hover {
+      background: #3a3a3c;
+      border-color: #4da3ff;
+    }
+
+    .skill-badge-strong {
+      background: #0077ed;
+      border-color: #0077ed;
+      color: #ffffff;
+    }
+
+    footer {
+      color: #77777c;
+    }
+  }
+    /* Apple Keynote 风内容淡入动画 */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      will-change: opacity, transform;
+      transition: opacity 0.75s cubic-bezier(.25,.8,.25,1), transform 0.75s cubic-bezier(.25,.8,.25,1);
+    }
+
+    .reveal-visible {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <!-- 顶部导航 -->
+  <header class="sticky-nav">
+    <div class="logo-text-main">胡爽 · AI 应用开发</div>
+    <nav>
+      <a href="#projects">作品集</a>
+      <a href="#skills">技能</a>
+      <a href="#about">关于我</a>
+      <a href="#contact">联系</a>
+    </nav>
+  </header>
+
+  <!-- 顶部简介 -->
+  <section class="hero">
+    <div>
+      <div class="hero-title">
+        打造 <span>人人能用的 AI 工具</span>
+      </div>
+      <div class="hero-subtitle">
+        计算机应用技术在读，专注于 AI 应用开发、Python 自动化脚本与 Web 工具搭建。
+        正在从 0 到 1 构建个人 AI 助手与决策系统，希望让复杂的技术变成好用的小工具。
+      </div>
+      <div class="hero-tags">
+        <span class="tag tag-strong">AI 应用开发</span>
+        <span class="tag">Python 自动化</span>
+        <span class="tag">FastAPI / Web</span>
+        <span class="tag">GPT API 集成</span>
+        <span class="tag">Chrome 插件 </span>
+      </div>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">
+          查看作品集 →
+        </button>
+        <button class="btn-outline" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+          联系我
+        </button>
+        <a class="btn-primary" href="files/胡爽简历.pdf" target="_blank">在线查看简历</a>
+      </div>
+    </div>
+
+    <aside class="hero-avatar-card avatar-small-card">
+  <img class="avatar-rounded" src="images/微信图片_20251125192148_18_29.jpg" alt="胡爽头像" />
+  <div class="avatar-text-wrap">
+    <div class="avatar-name">胡爽</div>
+    <div class="avatar-role">AI 应用开发 / 技术向产品实践者</div>
+    <div class="avatar-meta">江西泰豪动漫职业学院 · 计算机应用技术（在读）</div>
+    <div class="avatar-meta">预计毕业：2027 · 目标：2026 实习</div>
+  </div>
+</aside>
+  </section>
+
+  <!-- 作品集 -->
+  <section id="projects">
+    <div class="section-header">
+      <div class="section-title">
+        作品集 Projects
+        <span class="section-title-badge">持续更新中</span>
+      </div>
+      <div class="section-desc">以下项目均为个人独立设计和开发，未来会不断补充 Demo 链接与 GitHub 地址。</div>
+    </div>
+
+    <div class="projects-grid">
+      <!-- 项目 1：AI Personal Assistant -->
+      <article class="project-card">
+        <div class="project-pill">
+          ● 开发中 · Web 应用
+        </div>
+        <div class="project-name">AI Personal Assistant（个人 AI 助手）</div>
+        <div class="project-desc">
+          计划构建的 Web AI 助手，可帮助用户生成简历、求职邮件、学习规划、城市选择建议，
+          将 GPT 能力封装成简单好用的在线工具。
+        </div>
+        <div class="project-tech">
+          技术栈：Python · FastAPI · GPT API · HTML/CSS/JS · Cloudflare 部署
+        </div>
+        <div class="project-links">
+          <!-- 未来你有链接就替换 # -->
+          <a href="#" target="_blank">Demo（上线后补充）</a>
+          <a href="#" target="_blank">GitHub（创建后补充）</a>
+        </div>
+      </article>
+
+      <!-- 项目 2：城市推荐系统（预留） -->
+      <article class="project-card">
+        <div class="project-pill">
+          ● 规划中 · 决策引擎
+        </div>
+        <div class="project-name">City Recommendation Engine（城市推荐系统）</div>
+        <div class="project-desc">
+          根据气候、房价、交通、空气质量等维度，为用户推荐适合长期生活的城市，
+          展示算法思维与数据处理能力。
+        </div>
+        <div class="project-tech">
+          技术栈：Python · Pandas · 可视化（ECharts / Streamlit）· 简易 Web 界面
+        </div>
+        <div class="project-links">
+          <a href="#" target="_blank">Demo（完成后补充）</a>
+          <a href="#" target="_blank">GitHub（完成后补充）</a>
+        </div>
+      </article>
+
+      <!-- 项目 3：AI 文案插件（预留） -->
+      <article class="project-card">
+        <div class="project-pill">
+          ● 规划中 · 插件工具
+        </div>
+        <div class="project-name">AI Copy Assistant（浏览器 AI 文案助手）</div>
+        <div class="project-desc">
+          通过右键菜单或悬浮按钮，选中文本后一键调用 GPT 进行改写、润色或生成文案，
+          用于自媒体、电商或日常写作。
+        </div>
+        <div class="project-tech">
+          技术栈：JavaScript · Chrome 扩展 · GPT API · 前端基础交互
+        </div>
+        <div class="project-links">
+          <a href="#" target="_blank">演示视频（录制后补充）</a>
+          <a href="#" target="_blank">GitHub（完成后补充）</a>
+        </div>
+      </article>
+
+      <!-- 项目 4：Python 自动化脚本合集 -->
+      <article class="project-card">
+        <div class="project-pill">
+          ● 规划中 · 自动化工具库
+        </div>
+        <div class="project-name">Python Automation Toolkit（自动化脚本合集）</div>
+        <div class="project-desc">
+          开发批量文案处理、文本格式转换、文件整理等自动化脚本，构建个人工具库以提升效率。
+        </div>
+        <div class="project-tech">
+          技术栈：Python · CLI 工具 · argparse · OpenAI API
+        </div>
+        <div class="project-links">
+          <a href="#" target="_blank">Demo（完成后补充）</a>
+          <a href="#" target="_blank">GitHub（完成后补充）</a>
+        </div>
+      </article>
+      <article class="project-card">
+  <div class="project-pill">● 规划中 · AI 工具</div>
+  <div class="project-name">Study Planner AI（学习计划生成器）</div>
+  <div class="project-desc">
+    输入科目、时间与学习目标后，自动生成每日学习计划，让学习过程更可控。
+  </div>
+  <div class="project-tech">
+    技术栈：GPT API · FastAPI · 简易 Web 界面
+  </div>
+  <div class="project-links">
+    <a href="#" target="_blank">Demo（完成后补充）</a>
+    <a href="#" target="_blank">GitHub（完成后补充）</a>
+  </div>
+</article>
+
+<article class="project-card">
+  <div class="project-pill">● 开发中 · 脚本工具</div>
+  <div class="project-name">Auto Resume Formatter（简历自动排版工具）</div>
+  <div class="project-desc">
+    一键输入内容自动生成排版规范、格式统一的简历 PDF，提高求职效率。
+  </div>
+  <div class="project-tech">
+    技术栈：Python · CLI 工具 · PDF 生成
+  </div>
+  <div class="project-links">
+    <a href="#" target="_blank">Demo（完成后补充）</a>
+    <a href="#" target="_blank">GitHub（完成后补充）</a>
+  </div>
+</article>
+    </div>
+  </section>
+
+  <!-- 技能 -->
+  <section id="skills">
+    <div class="section-header">
+      <div class="section-title">技能栈 Skills</div>
+      <div class="section-desc">随着项目推进，这里的技能会不断加深与细化。</div>
+    </div>
+    <div class="skills-wrap">
+      <!-- AI 能力 -->
+      <div class="skill-group-title">AI 能力</div>
+      <span class="skill-badge skill-badge-strong">Python 开发</span>
+      <span class="skill-badge">GPT API 调用 / Prompt 设计</span>
+      <span class="skill-badge">AI 产品化思维</span>
+      <span class="skill-badge">Prompt 工程进阶技巧</span>
+      <span class="skill-badge">学习计划算法设计</span>
+
+      <!-- 后端开发 -->
+      <div class="skill-group-title">后端开发</div>
+      <span class="skill-badge">FastAPI / Flask（基础）</span>
+      <span class="skill-badge">异步编程（Async / Await）</span>
+      <span class="skill-badge">API 设计与接口调试</span>
+      <span class="skill-badge">JSON / RESTful 规范</span>
+      <span class="skill-badge">PDF 生成工具开发</span>
+
+      <!-- 自动化脚本 -->
+      <div class="skill-group-title">自动化脚本</div>
+      <span class="skill-badge">自动化脚本 / CLI 工具</span>
+      <span class="skill-badge">数据清洗与预处理（Pandas）</span>
+      <span class="skill-badge">独立项目从 0–1 规划能力</span>
+
+      <!-- 前端开发 -->
+      <div class="skill-group-title">前端开发</div>
+      <span class="skill-badge">Web 基础：HTML / CSS / JS</span>
+      <span class="skill-badge">简单的前端交互与 UI 调整</span>
+      <span class="skill-badge">前端布局（Flex/Grid）</span>
+      <span class="skill-badge">浏览器插件开发（基础）</span>
+
+      <!-- 工具与部署 -->
+      <div class="skill-group-title">工具与部署</div>
+      <span class="skill-badge">Git / GitHub 使用</span>
+      <span class="skill-badge">基础 Linux 指令</span>
+      <span class="skill-badge">Cloudflare Pages / Workers 部署</span>
+    </div>
+  </section>
+
+  <!-- 关于我 + 联系方式 -->
+  <section id="about">
+    <div class="section-header">
+      <div class="section-title">关于我 About</div>
+      <div class="section-desc">一点背景介绍，让你知道我是谁，以及我在做什么。</div>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          我是胡爽，目前就读于江西泰豪动漫职业学院，专业是计算机应用技术。
+          对 AI 应用开发、自动化脚本和 Web 工具搭建有浓厚兴趣，希望通过一个个小项目，
+          把复杂的技术变成普通人也能用的产品。
+        </p>
+        <p>
+          相比只停留在“会写代码”，我更在意“做出真的能用的东西”：
+          例如个人 AI 助手、城市决策引擎、自动化文案工具等。
+          未来希望在实习和工作中，继续打磨这类产品，把它们接到真实业务中。
+        </p>
+        <p>
+          我习惯通过实践来学习，不怕从 0 开始，也不怕慢，只要方向对，就愿意长期投入。
+          欢迎你通过下面的方式联系我，如果有合适的 AI 应用相关实习或项目合作，也非常期待。
+        </p>
+      </div>
+
+      <div id="contact" class="contact-card">
+        <div class="contact-item">
+          <span>所在地</span>
+          <span>乌鲁木齐</span>
+        </div>
+        <div class="contact-item">
+          <span>邮箱</span>
+          <span>2863281922@qq.com</span>
+        </div>
+        <div class="contact-item">
+          <span>电话</span>
+          <span>189-5440-7833</span>
+        </div>
+        <div class="contact-item">
+          <span>GitHub</span>
+          <span><a href="https://github.com/tuzi3212" target="_blank">github.com/tuzi3212</a></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © <span id="year"></span> 胡爽 · AI 应用开发 · Powered by 静态页面 + Cloudflare Pages
+  </footer>
+
+</div>
+
+<script>
+// 更新年份
+document.getElementById("year").textContent = new Date().getFullYear();
+
+// Sticky 导航栏缩放
+window.addEventListener("scroll", () => {
+  const nav = document.querySelector(".sticky-nav");
+  nav.style.padding = window.scrollY > 40 ? "8px 0" : "14px 0";
+});
+
+// HERO 区淡入动画
+document.addEventListener("DOMContentLoaded", () => {
+  const heroItems = document.querySelectorAll(".hero-title, .hero-subtitle");
+  heroItems.forEach((item, index) => {
+    setTimeout(() => item.classList.add("hero-fade-in"), 200 + index * 180);
+  });
+});
+
+// Keynote 风滚动淡入动画
+document.addEventListener("DOMContentLoaded", () => {
+  const reveals = document.querySelectorAll(".project-card, .skill-badge, .section-title, .about-text, .contact-card");
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => entry.isIntersecting && entry.target.classList.add("reveal-visible"));
+  }, { threshold: 0.12, rootMargin: "0px 0px -6%" });
+  reveals.forEach(el => { el.classList.add("reveal"); observer.observe(el); });
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    reveals.forEach(el => el.style.transition = "none");
+  }
+});
+
+// Smooth Scroll
+document.querySelectorAll('a[href^="#"], button[href^="#"]').forEach(el => {
+  el.addEventListener("click", function(e) {
+    const targetID = this.getAttribute("href");
+    if (!targetID || targetID === "#") return;
+    const target = document.querySelector(targetID);
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+});
+
+// 按钮轻触波纹动画
+document.querySelectorAll("button, .btn-primary, .btn-outline").forEach(btn => {
+  btn.style.position = "relative";
+  btn.style.overflow = "hidden";
+  btn.addEventListener("click", function(e) {
+    const ripple = document.createElement("span");
+    ripple.style.position = "absolute";
+    ripple.style.width = ripple.style.height = "120px";
+    ripple.style.background = "rgba(255,255,255,0.35)";
+    ripple.style.borderRadius = "999px";
+    ripple.style.pointerEvents = "none";
+    ripple.style.transform = "scale(0)";
+    ripple.style.opacity = "0.75";
+    ripple.style.transition = "transform 0.45s ease, opacity 0.45s ease";
+
+    const rect = this.getBoundingClientRect();
+    ripple.style.left = e.clientX - rect.left - 60 + "px";
+    ripple.style.top = e.clientY - rect.top - 60 + "px";
+
+    this.appendChild(ripple);
+    requestAnimationFrame(() => {
+      ripple.style.transform = "scale(1)";
+      ripple.style.opacity = "0";
+    });
+    setTimeout(() => ripple.remove(), 450);
+  });
+});
+</script>
+</body>
+</html>
